@@ -76,13 +76,22 @@ public class EmpleadoController : BaseApiController
     {
         var empleado = await unitofwork.Empleados.GetByIdAsync(id);
 
-        if (empleado == null)
-        {
-            return Notfound();
-        }
+        // if (empleado == null)
+        // {
+        //     return Notfound();
+        // }
 
         unitofwork.Empleados.Remove(empleado);
         await unitofwork.SaveAsync();
         return NoContent();
+    }
+
+    [HttpGet("jefeDelJefe")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    public async Task<ActionResult<IEnumerable<object>>> GetJefeDelJefe()
+    {
+        var jefeDelJefe = await unitofwork.Empleados.jefeEmpleados();
+        return mapper.Map<List<object>>(jefeDelJefe);
     }
 }

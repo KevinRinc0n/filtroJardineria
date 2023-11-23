@@ -1,5 +1,5 @@
 using System.Linq.Expressions;
-using Domain.Interfaces;
+using Dominio.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using Persistencia.Data;
 

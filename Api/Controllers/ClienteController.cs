@@ -76,13 +76,49 @@ public class ClienteController : BaseApiController
     {
         var cliente = await unitofwork.Clientes.GetByIdAsync(id);
 
-        if (cliente == null)
-        {
-            return Notfound();
-        }
+        // if (cliente == null)
+        // {
+        //     return Notfound();
+        // }
 
         unitofwork.Clientes.Remove(cliente);
         await unitofwork.SaveAsync();
         return NoContent();
+    }
+
+    [HttpGet("clientePagoYRepresentante")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    public async Task<ActionResult<IEnumerable<ClienteeDto>>> GetPagoYRepresentantes()
+    {
+        var pagosYRepresentante = await unitofwork.Clientes.clientePagosYRepresentante();
+        return mapper.Map<List<ClienteeDto>>(pagosYRepresentante);
+    }
+
+    [HttpGet("sinPagos")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    public async Task<ActionResult<IEnumerable<ClienteDto>>> GetSinPagos()
+    {
+        var clientesSinPagos = await unitofwork.Clientes.sinPagos();
+        return mapper.Map<List<ClienteDto>>(clientesSinPagos);
+    }
+
+    [HttpGet("clientess")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    public async Task<ActionResult<IEnumerable<ClienteRepDto>>> Getclientess()
+    {
+        var clientts = await unitofwork.Clientes.clientess();
+        return mapper.Map<List<ClienteRepDto>>(clientts);
+    }
+
+    [HttpGet("sinPagos2")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    public async Task<ActionResult<IEnumerable<ClienteRep2Dto>>> GetSinPagos2()
+    {
+        var clientesSinPagos2 = await unitofwork.Clientes.sinPagos2();
+        return mapper.Map<List<ClienteRep2Dto>>(clientesSinPagos2);
     }
 }

@@ -23,5 +23,23 @@ public class MappingProfiles: Profile
         CreateMap<Pedido, PedidoDto>().ReverseMap();
 
         CreateMap<Producto, ProductoDto>().ReverseMap();
+
+        CreateMap<Cliente, ClienteeDto>().ReverseMap();
+
+        CreateMap<Producto, ProductoImgDto>().ReverseMap();
+
+        CreateMap<GamaProducto, GamaImgDto>().ReverseMap();
+
+        CreateMap<Cliente, ClienteRepDto>().ReverseMap();
+
+        CreateMap<Oficina, OficinaCiuDto>().ReverseMap();
+
+        CreateMap<Empleado, EmpleadoRepDto>().ReverseMap();
+
+        CreateMap<Cliente, ClienteRep2Dto>().ReverseMap();
+
+        CreateMap<Oficina, OficinaTelDto>().ReverseMap();
+
+        CreateMap<Empleado, EmpleadoRep2Dto>().ReverseMap();
     }
 }

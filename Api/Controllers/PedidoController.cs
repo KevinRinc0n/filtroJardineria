@@ -76,10 +76,10 @@ public class PedidoController : BaseApiController
     {
         var pedido = await unitofwork.Pedidos.GetByIdAsync(id);
 
-        if (pedido == null)
-        {
-            return Notfound();
-        }
+        // if (pedido == null)
+        // {
+        //     return Notfound();
+        // }
 
         unitofwork.Pedidos.Remove(pedido);
         await unitofwork.SaveAsync();

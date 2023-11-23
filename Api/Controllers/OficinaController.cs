@@ -76,10 +76,10 @@ public class OficinaController : BaseApiController
     {
         var oficina = await unitofwork.Oficinas.GetByIdAsync(id);
 
-        if (oficina == null)
-        {
-            return Notfound();
-        }
+        // if (oficina == null)
+        // {
+        //     return Notfound();
+        // }
 
         unitofwork.Oficinas.Remove(oficina);
         await unitofwork.SaveAsync();

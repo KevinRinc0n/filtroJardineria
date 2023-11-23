@@ -76,10 +76,10 @@ public class DetallePedidoController : BaseApiController
     {
         var detallePedido = await unitofwork.DetallePedidos.GetByIdAsync(id);
 
-        if (detallePedido == null)
-        {
-            return Notfound();
-        }
+        // if (detallePedido == null)
+        // {
+        //     return Notfound();
+        // }
 
         unitofwork.DetallePedidos.Remove(detallePedido);
         await unitofwork.SaveAsync();

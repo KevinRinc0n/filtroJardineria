@@ -76,10 +76,10 @@ public class GamaProductoController : BaseApiController
     {
         var gamaProducto = await unitofwork.GamaProductos.GetByIdAsync(id);
 
-        if (gamaProducto == null)
-        {
-            return Notfound();
-        }
+        // if (gamaProducto == null)
+        // {
+        //     return Notfound();
+        // }
 
         unitofwork.GamaProductos.Remove(gamaProducto);
         await unitofwork.SaveAsync();

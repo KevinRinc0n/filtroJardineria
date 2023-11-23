@@ -76,13 +76,31 @@ public class PagoController : BaseApiController
     {
         var pago = await unitofwork.Pagos.GetByIdAsync(id);
 
-        if (pago == null)
-        {
-            return Notfound();
-        }
+        // if (pago == null)
+        // {
+        //     return Notfound();
+        // }
 
         unitofwork.Pagos.Remove(pago);
         await unitofwork.SaveAsync();
         return NoContent();
+    }
+
+    [HttpGet("paypal2008")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    public async Task<ActionResult<IEnumerable<PagoDto>>> GetPaypal2008()
+    {
+        var paypal2008 = await unitofwork.Pagos.paypal2008();
+        return mapper.Map<List<PagoDto>>(paypal2008);
+    }
+
+    [HttpGet("formasPago")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    public async Task<ActionResult<IEnumerable<string>>> GetFormasPago()
+    {
+        var formasDePago = await unitofwork.Pagos.formasPago();
+        return mapper.Map<List<string>>(formasDePago);
     }
 }

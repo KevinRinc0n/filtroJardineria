@@ -76,13 +76,22 @@ public class ProductoController : BaseApiController
     {
         var producto = await unitofwork.Productos.GetByIdAsync(id);
 
-        if (producto == null)
-        {
-            return Notfound();
-        }
+        // if (producto == null)
+        // {
+        //     return Notfound();
+        // }
 
         unitofwork.Productos.Remove(producto);
         await unitofwork.SaveAsync();
         return NoContent();
+    }
+
+    [HttpGet("sinPedidos")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    public async Task<ActionResult<IEnumerable<ProductoImgDto>>> GetProductsSinPedidos()
+    {
+        var sinPedido = await unitofwork.Productos.productosSinPedido();
+        return mapper.Map<List<ProductoImgDto>>(sinPedido);
     }
 }
